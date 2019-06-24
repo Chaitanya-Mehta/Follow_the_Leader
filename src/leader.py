@@ -1,9 +1,13 @@
 #!/usr/bin/env python
 import rospy
 from std_msgs.msg import String
+from geometry_msgs.msg import Twist
+from geometry_msgs.msg import Pose
 
 def chatter_callback(message):
-    rospy.loginfo(rospy.get_caller_id() + "I heard %s", message.data)
+    rospy.init_node('listener', anonymous=True)
+    rospy.Subscriber("chatter", String, chatter_callback)
+    rospy.spin()
     
 def listener():
     rospy.init_node('listener', anonymous=True)
@@ -13,19 +17,15 @@ def listener():
 if __name__ == '__main__':
     listener()
 
-def talker():
-    pub = rospy.Publisher('chatter', String, queue_size=10)
-    rospy.init_node('talker', anonymous=True)
+def velocity_commander():
     rate = rospy.Rate(1)
     i = 0
     while not rospy.is_shutdown():
-        hello_str = "hello world %s" % i
-        rospy.loginfo(hello_str)
-        pub.publish(hello_str)
+        pose_pub.publish()
         rate.sleep()
-        i=i+1
 if __name__ == '__main__':
     try:
-        talker()
+        pose_pub = rospy.Publisher('leader_pose', String, queue_size=10)
+        rospy.init_node('leader_pose_publisher', anonymous=True)
     except rospy.ROSInterruptException:
         pass

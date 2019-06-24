@@ -2,6 +2,12 @@
 import rospy
 from std_msgs.msg import String
 
+#follower robot subscribes to leader's pose, 
+# its own pose and publishes its future speed to its own turtle
+# location of the leader is its goal position, but it achiieves it while avoiding obstacles
+
+# It may not be necessary that the follower should see the leader.
+# As a sheep, It would go where bulk of the sheep goes, following the first one. 
 def chatter_callback(message):
     rospy.loginfo(rospy.get_caller_id() + "I heard %s", message.data)
     
