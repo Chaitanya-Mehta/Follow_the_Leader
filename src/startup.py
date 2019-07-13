@@ -6,14 +6,17 @@ from turtlesim.srv import Spawn
 from turtlesim.srv import SpawnRequest
 from turtlesim.srv import SpawnResponse
 
+# Strtup file is to initialize the simulation and setup the environment
+# set the number of robots and orient and position them randomly, Declare the leader
 def add_two_ints_client(x, y):
-    rospy.wait_for_service('turtlesim/Spawn')
+    rospy.wait_for_service('add_two_ints')
     try:
-        add_two_ints = rospy.ServiceProxy('turtlesim_spawn', Spawn)
-        resp1 = (x, y)
-        return setup_done:
+        add_two_ints = rospy.ServiceProxy('add_two_ints', AddTwoInts)
+        resp1 = add_two_ints(x, y)
+        return resp1.sum
     except rospy.ServiceException, e:
         print "Service call failed: %s"%e
+
 
 def usage():
     return "%s [x y]"%sys.argv[0]

@@ -4,6 +4,9 @@ from std_msgs.msg import String
 from geometry_msgs.msg import Twist
 from geometry_msgs.msg import Pose
 
+# leader to be selected as turtle 1 and operated by keyboard
+
+
 def chatter_callback(message):
     rospy.init_node('listener', anonymous=True)
     rospy.Subscriber("chatter", String, chatter_callback)
