@@ -29,7 +29,7 @@ def talker():
         rospy.loginfo(hello_str)
         pub.publish(hello_str)
         rate.sleep()
-        i=i+1
+        i=i+2
 if __name__ == '__main__':
     try:
         talker()
